@@ -1,0 +1,56 @@
+# OS-specific
+Thumbs.db
+.DS_Store
+
+# Python cache and build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# VS Code settings
+.vscode/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Data files (raw/generated)
+# data/raw/*.csv
+data/raw/*.parquet
+data/processed/
+
+# Models and artifacts
+# models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.onnx
+
+# Streamlit and local runtime caches
+.streamlit/
+.cache/
+
+# Logs and temp
+*.log
+logs/
+tmp/
+temp/
+
+# Images generated during runs
+images/generated/
+
+# Node/Frontend (if added later)
+node_modules/
+*.env
+.env*
+
+# Ignore specific files
+scripts/
+
