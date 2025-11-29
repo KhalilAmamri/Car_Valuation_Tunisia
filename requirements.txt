@@ -14,5 +14,6 @@ joblib>=1.3.0
 
 # Web application
 streamlit>=1.30.0
+plotly>=5.18.0
 
 
