@@ -103,7 +103,7 @@ def prepare_input(user_input, artifact):
     # Create DataFrame
     df_input = pd.DataFrame([user_input])
     
-    # Feature engineering (same as training)
+    # Feature engineering (must match training: age and mileage_per_year only)
     df_input['age'] = 2025 - df_input['year']
     df_input['mileage_per_year'] = df_input['mileage'] / df_input['age'].replace(0, 1)
     
@@ -181,8 +181,6 @@ with st.sidebar:
     if metrics:
         st.metric("R² Score", f"{metrics.get('r2_test', 0):.4f}")
         st.metric("MAE", f"{metrics.get('mae', 0):,.0f} TND")
-        st.metric("RMSE", f"{metrics.get('rmse', 0):,.0f} TND")
-        st.metric("MAPE", f"{metrics.get('mape', 0):.2f}%")
     
     st.markdown("---")
     st.markdown("**Developed by:** Khalil Amamri • Montassar Zreilli • Wassim Mnassri • Mahdi Hadj Amor ")
