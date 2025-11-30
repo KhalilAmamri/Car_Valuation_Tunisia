@@ -185,7 +185,7 @@ with st.sidebar:
         st.metric("MAPE", f"{metrics.get('mape', 0):.2f}%")
     
     st.markdown("---")
-    st.markdown("**Developed by:** Khalil Amamri")
+    st.markdown("**Developed by:** Khalil Amamri • Montassar Zreilli • Wassim Mnassri • Mahdi Hadj Amor ")
     st.markdown("**Model:** Linear Regression")
 
 # Main content
