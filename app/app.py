@@ -154,7 +154,7 @@ else:
 fuel_types = ["Essence", "Diesel", "Hybride"]
 gearbox_types = ["Manuelle", "Automatique"]
 conditions = ["excellent", "tres bon etat", "bon etat", "moyen", "a reparer"]
-car_bodies = ["citadine", "compacte", "berline", "SUV", "break", "monospace"]
+car_bodies = ["citadine", "compacte", "berline", "SUV", "break", "monospace", "pickup"]
 import_types = ["local", "imported"]
 
 # Header
@@ -163,13 +163,16 @@ st.markdown('<div class="sub-header">Get instant price estimates for used cars i
 
 # Sidebar
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Tunisia.svg/320px-Flag_of_Tunisia.svg.png", 
-             width=100)
+    flag_path = Path(__file__).parent.parent / "images" / "Flag_of_Tunisia.png"
+    if flag_path.exists():
+        st.image(str(flag_path), width=100)
+    else:
+        st.image("🇹🇳")
     st.title("About")
     st.info(
         """
         This app predicts used car prices in Tunisia using a **Linear Regression** model 
-        trained on 30,000 car listings.
+        trained on 60,000+ car listings across all 24 governorates.
         """
     )
     
@@ -382,6 +385,6 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; font-size: 0.9rem;">
     <p>🚗 Tunisia Car Price Predictor | Powered by Machine Learning</p>
-    <p>Data based on 30,000+ car listings in Tunisia</p>
+    <p>Data based on 60,000+ car listings across all 24 governorates of Tunisia</p>
 </div>
 """, unsafe_allow_html=True)
