@@ -195,8 +195,16 @@ with st.sidebar:
         st.metric("MAE", f"{metrics.get('mae', 0):,.0f} TND")
     
     st.markdown("---")
-    st.markdown("**Developed by:** Khalil Amamri • Montassar Zreilli • Wassim Mnassri • Mahdi Hadj Amor ")
     st.markdown("**Model:** Linear Regression")
+    st.markdown("### 👥 Developed By")
+    st.markdown("""
+    <div style='line-height:1.6;'>
+    <strong>Khalil Amamri</strong><br>
+    <strong>Montassar Zreilli</strong><br>
+    <strong>Wassim Mnassri</strong><br>
+    <strong>Mahdi Hadj Amor</strong>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Main content
 col1, col2 = st.columns([2, 1])
@@ -390,11 +398,26 @@ with col_insight2:
     - 📍 **Consider location** when pricing
     """)
 
+# Team & Credits (moved from sidebar for better focus)
+with st.expander("👥 Project Team & Credits"):
+    st.markdown("""
+    **Core Team**
+    - Khalil Amamri  
+    - Montassar Zreilli  
+    - Wassim Mnassri  
+    - Mahdi Hadj Amor  
+    
+    **Notes**
+    - Dataset is synthetic and for educational purposes.
+    - Linear Regression emphasizes interpretability over raw predictive power.
+    """)
+
 # Footer
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; font-size: 0.9rem;">
     <p>🚗 Tunisia Car Price Predictor | Powered by Machine Learning</p>
     <p>Data based on 60,000+ car listings across all 24 governorates of Tunisia</p>
+    <p><strong>Team:</strong> Khalil Amamri · Montassar Zreilli · Wassim Mnassri · Mahdi Hadj Amor</p>
 </div>
 """, unsafe_allow_html=True)
