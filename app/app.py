@@ -99,26 +99,28 @@ def load_dataset_info():
         return None
 
 def prepare_input(user_input, artifact):
-    """Prepare user input for prediction"""
-    # Create DataFrame
-    df_input = pd.DataFrame([user_input])
+    """Prepare user input for prediction with proper categorical encoding"""
+    # Load dataset to get all category values
+    data_path = Path(__file__).parent.parent / "data" / "raw" / "tunisia_cars_dataset.csv"
+    df_train = pd.read_csv(data_path)
     
-    # Feature engineering (must match training: age and mileage_per_year only)
+    # Create input dataframe
+    df_input = pd.DataFrame([user_input])
     df_input['age'] = 2025 - df_input['year']
     df_input['mileage_per_year'] = df_input['mileage'] / df_input['age'].replace(0, 1)
     
-    # One-hot encode categorical columns
+    # Convert categorical columns to pd.Categorical with categories from training data
     cat_cols = artifact['categorical_columns']
+    for col in cat_cols:
+        df_input[col] = pd.Categorical(df_input[col], categories=df_train[col].unique())
+    
+    # One-hot encode with drop_first
     df_encoded = pd.get_dummies(df_input, columns=cat_cols, drop_first=True)
     
-    # Align columns with training data
-    final_cols = artifact['feature_columns']
-    for col in final_cols:
-        if col not in df_encoded.columns:
-            df_encoded[col] = 0
-    df_encoded = df_encoded[final_cols]
+    # Align with training features using reindex
+    df_encoded = df_encoded.reindex(columns=artifact['feature_columns'], fill_value=0)
     
-    # Scale numeric features
+    # Scale numeric columns
     numeric_cols = artifact['numeric_columns']
     df_encoded[numeric_cols] = artifact['scaler'].transform(df_encoded[numeric_cols])
     
