@@ -112,9 +112,10 @@ def prepare_input(user_input, artifact):
     # Convert categorical columns to pd.Categorical with categories from training data
     cat_cols = artifact['categorical_columns']
     for col in cat_cols:
-        df_input[col] = pd.Categorical(df_input[col], categories=df_train[col].unique())
+        cats = sorted(df_train[col].dropna().unique().tolist())
+        df_input[col] = pd.Categorical(df_input[col], categories=cats)
     
-    # One-hot encode with drop_first
+    # One-hot encode with drop_first (consistent alphabetical baseline)
     df_encoded = pd.get_dummies(df_input, columns=cat_cols, drop_first=True)
     
     # Align with training features using reindex
@@ -153,11 +154,20 @@ else:
                  "Bizerte", "Gabes", "Kairouan", "Gafsa"]
     colors = ["blanc", "noir", "gris", "argent", "rouge", "bleu", "vert", "beige"]
 
-fuel_types = ["Essence", "Diesel", "Hybride"]
-gearbox_types = ["Manuelle", "Automatique"]
-conditions = ["excellent", "tres bon etat", "bon etat", "moyen", "a reparer"]
-car_bodies = ["citadine", "compacte", "berline", "SUV", "break", "monospace", "pickup"]
-import_types = ["local", "imported"]
+# Build dropdown lists from dataset to ensure exact label match
+if dataset is not None:
+    fuel_types = sorted(dataset['fuel'].dropna().unique().tolist())
+    gearbox_types = sorted(dataset['gearbox'].dropna().unique().tolist())
+    conditions = sorted(dataset['vehicle_condition'].dropna().unique().tolist())
+    car_bodies = sorted(dataset['car_body'].dropna().unique().tolist())
+    import_types = sorted(dataset['import_or_local'].dropna().unique().tolist())
+else:
+    # Fallback defaults if dataset isn't available
+    fuel_types = ["Essence", "Diesel", "Hybride"]
+    gearbox_types = ["Manuelle", "Automatique"]
+    conditions = ["excellent", "tres bon etat", "bon etat", "moyen", "a reparer"]
+    car_bodies = ["citadine", "compacte", "berline", "SUV", "break", "monospace", "pickup"]
+    import_types = ["local", "imported"]
 
 # Header
 st.markdown('<div class="main-header">🚗 Tunisia Car Price Predictor</div>', unsafe_allow_html=True)
