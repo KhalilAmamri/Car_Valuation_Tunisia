@@ -418,6 +418,5 @@ st.markdown("""
 <div style="text-align: center; color: #666; font-size: 0.9rem;">
     <p>🚗 Tunisia Car Price Predictor | Powered by Machine Learning</p>
     <p>Data based on 60,000+ car listings across all 24 governorates of Tunisia</p>
-    <p><strong>Team:</strong> Khalil Amamri · Montassar Zreilli · Wassim Mnassri · Mahdi Hadj Amor</p>
 </div>
 """, unsafe_allow_html=True)
