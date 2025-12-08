@@ -52,5 +52,5 @@ node_modules/
 .env*
 
 # Ignore specific files
-scripts/
+#scripts/
 
