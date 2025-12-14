@@ -52,6 +52,35 @@ This project builds a transparent, reproducible workflow to estimate used car pr
 
 ---
 
+## 🌟 Live Application Preview
+
+> **Try it live:** https://car-valuation-tunisia.streamlit.app/
+
+### App Interface - Input Form & Configuration
+
+![App Interface Main](images/app_interface_main1.png)
+
+**Features:**
+
+- 📝 **Easy Input Form**: Select car brand, model, year, mileage, and specifications
+- 🎯 **Real-time Calculations**: Instant updates as you adjust values
+- 📊 **Model Metrics**: View R² = 0.8991 and MAE = 3,876 TND in sidebar
+- 🚗 **Complete Car Specifications**: Brand, model, fuel, gearbox, condition, body type, horsepower, engine size
+
+### App Interface - Prediction Results & Insights
+
+![App Interface Prediction](images/app_interface_main2.png)
+
+**Results Display:**
+
+- 💰 **Instant Price Prediction**: Get estimated price in seconds
+- 📊 **Price Confidence Range**: ±15% range for realistic valuation
+- 📋 **Car Summary**: See key details about the selected vehicle
+- 🔑 **Key Factors**: Age and annual mileage analysis with trend indicators
+- 👥 **Team Information**: View developed by section with team member names
+
+---
+
 ## 3. Data & Generation Process
 
 Located in `scripts/script_to_generate_dataset.ipynb`.
