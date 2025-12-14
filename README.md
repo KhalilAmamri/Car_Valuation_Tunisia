@@ -58,7 +58,7 @@ This project builds a transparent, reproducible workflow to estimate used car pr
 
 ### App Interface - Input Form & Configuration
 
-![App Interface Main](images/app_interface_main1.png)
+![App Interface Main](images/main_interface1.png)
 
 **Features:**
 
@@ -69,7 +69,7 @@ This project builds a transparent, reproducible workflow to estimate used car pr
 
 ### App Interface - Prediction Results & Insights
 
-![App Interface Prediction](images/app_interface_main2.png)
+![App Interface Prediction](images/main_interface2.png)
 
 **Results Display:**
 
