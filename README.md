@@ -14,6 +14,7 @@ Estimate used car prices in Tunisia using a Multiple Linear Regression model tra
 
 - [Overview](#overview)
 - [Key Features](#key-features)
+- [Live Application Preview](#-live-application-preview)
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [How to Use](#how-to-use)
@@ -41,6 +42,35 @@ This project provides a transparent, end-to-end machine learning workflow to est
 - 📊 **Model Transparency**: View top coefficients and feature weights
 - 💾 **Reproducible**: Full notebook-based pipeline with versioned artifacts
 - 🧪 **60,000+ Dataset**: Synthetic but realistic car listings
+
+---
+
+## 🌟 Live Application Preview
+
+> **Try it live:** https://car-valuation-tunisia.streamlit.app/
+
+### App Interface - Input Form & Configuration
+
+![App Interface Main](images/main_interface1.png)
+
+**Features:**
+
+- 📝 **Easy Input Form**: Select car brand, model, year, mileage, and specifications
+- 🎯 **Real-time Calculations**: Instant updates as you adjust values
+- 📊 **Model Metrics**: View R² = 0.8991 and MAE = 3,876 TND in sidebar
+- 🚗 **Complete Car Specifications**: Brand, model, fuel, gearbox, condition, body type, horsepower, engine size
+
+### App Interface - Prediction Results & Insights
+
+![App Interface Prediction](images/main_interface2.png)
+
+**Results Display:**
+
+- 💰 **Instant Price Prediction**: Get estimated price in seconds
+- 📊 **Price Confidence Range**: ±15% range for realistic valuation
+- 📋 **Car Summary**: See key details about the selected vehicle
+- 🔑 **Key Factors**: Age and annual mileage analysis with trend indicators
+- 👥 **Team Information**: View developed by section with team member names
 
 ---
 
