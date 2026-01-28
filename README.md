@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚗 Tunisia Car Price Predictor (Tunisia Car Valuation)
+# 🚗 Tunisia Car Price Predictor
 
-Predict realistic used car prices across all 24 Tunisian governorates using a Multiple Linear Regression model trained on a rich synthetic dataset (60,000+ listings, 23 brands, diverse vehicle attributes).
+Estimate used car prices in Tunisia using a Multiple Linear Regression model trained on 60,000+ synthetic listings (23 brands, 89% accuracy). Interactive Streamlit app with real-time predictions.
 
 **Live App:** https://car-valuation-tunisia.streamlit.app/
 
@@ -10,136 +10,65 @@ Predict realistic used car prices across all 24 Tunisian governorates using a Mu
 
 ---
 
-## 📌 Table of Contents
+## 📌 Quick Navigation
 
-1. Overview
-2. Key Features
-3. Data & Generation Process
-4. Modeling Approach
-5. Project Structure
-6. Installation & Quick Start
-7. Usage (CLI / Notebook / App)
-8. Model Artifact Details
-9. Metrics & Evaluation
-10. Feature Definitions
-11. How to Reproduce End‑to‑End
-12. Roadmap & Possible Enhancements
-13. Disclaimer
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [How to Use](#how-to-use)
+- [Disclaimer](#disclaimer)
 
 ---
 
-## 1. Overview
+## Overview
 
-This project builds a transparent, reproducible workflow to estimate used car prices in Tunisia. It combines:
+This project provides a transparent, end-to-end machine learning workflow to estimate used car prices in Tunisia. It includes:
 
-- A synthetic but domain‑aware dataset generator reflecting local market dynamics (brand, condition, fuel type, geography, etc.).
-- A streamlined Jupyter notebook training pipeline (Sections 1–7) for data loading → EDA → cleaning → feature engineering → training → evaluation → artifact saving.
-- A responsive Streamlit web app with dynamic dropdowns sourced directly from the dataset to ensure encoding consistency and correct categorical influence on predictions.
+- **Synthetic Dataset Generator**: Reflects real market dynamics (brand, condition, fuel type, mileage, location, etc.)
+- **ML Pipeline**: Data loading → Cleaning → Feature engineering → Linear Regression training → Evaluation
+- **Interactive Web App**: Streamlit interface with real-time predictions and model insights
 
-> Goal: Educational illustration of a structured ML lifecycle (data generation → modeling → deployment) rather than a real commercial valuation engine.
-
----
-
-## 2. Key Features
-
-- 🔧 Synthetic dataset with realistic adjustments (brand base price, body type premiums, condition, gearbox, fuel, location, color, accident & ownership penalties, options adders).
-- 🧪 Multiple Linear Regression with engineered features (`age`, `mileage_per_year`).
-- 🧼 Robust missing value handling (median for numeric, drop rows with missing critical categoricals).
-- 🏷 Dynamic categorical encoding using `pandas.get_dummies(drop_first=True)` aligned between training and inference.
-- 🖥 Streamlit UI providing instant predictions and model insight panels (top coefficients, feature importance proxy via weights).
-- 🧩 Clean artifact (`joblib`) bundling model, scaler, columns, engineered feature names, and metrics (R² & MAE only—RMSE intentionally removed).
-- 📊 Minimal, focused visualizations (scatter Year vs Price, Mileage vs Price; Actual vs Predicted evaluation scatter).
+**Goal**: Demonstrate a complete ML lifecycle (from data generation to deployment) for educational purposes.
 
 ---
 
-## 🌟 Live Application Preview
+## Key Features
 
-> **Try it live:** https://car-valuation-tunisia.streamlit.app/
-
-### App Interface - Input Form & Configuration
-
-![App Interface Main](images/main_interface1.png)
-
-**Features:**
-
-- 📝 **Easy Input Form**: Select car brand, model, year, mileage, and specifications
-- 🎯 **Real-time Calculations**: Instant updates as you adjust values
-- 📊 **Model Metrics**: View R² = 0.8991 and MAE = 3,876 TND in sidebar
-- 🚗 **Complete Car Specifications**: Brand, model, fuel, gearbox, condition, body type, horsepower, engine size
-
-### App Interface - Prediction Results & Insights
-
-![App Interface Prediction](images/main_interface2.png)
-
-**Results Display:**
-
-- 💰 **Instant Price Prediction**: Get estimated price in seconds
-- 📊 **Price Confidence Range**: ±15% range for realistic valuation
-- 📋 **Car Summary**: See key details about the selected vehicle
-- 🔑 **Key Factors**: Age and annual mileage analysis with trend indicators
-- 👥 **Team Information**: View developed by section with team member names
+- ✅ **Accuracy**: R² = 89.91% | MAE = 3,876 TND
+- 🎯 **Real-time Predictions**: Instant price estimates via Streamlit UI
+- 🔧 **Smart Encoding**: Dynamic categorical features aligned between training and inference
+- 📊 **Model Transparency**: View top coefficients and feature weights
+- 💾 **Reproducible**: Full notebook-based pipeline with versioned artifacts
+- 🧪 **60,000+ Dataset**: Synthetic but realistic car listings
 
 ---
 
-## 3. Data & Generation Process
-
-Located in `scripts/script_to_generate_dataset.ipynb`.
-
-Generation logic applies layered effects:
-
-- Brand base prices + model adjustments (SUV / pickup / premium / economy patterns).
-- Age depreciation (4% of base per year) & mileage penalty (≈12 TND per 1,000 km).
-- Condition deltas (from +15% for excellent to −30% for repair needed).
-- Gearbox (automatic +8%), fuel (hybrid +10%, diesel −3%).
-- Body type multipliers (e.g., pickup 1.20×, SUV 1.15×).
-- Location premiums (e.g., Tunis +5%).
-- Color subtle boosts (neutral colors add small amounts).
-- Accident and owner count penalties.
-- Optional feature additive contributions (sunroof, alloy wheels, etc.).
-- Additive stochastic noise for price variance.
-
-All rows constrained to a final price range [5,000 – 250,000] TND.
-
-> Synthetic nature enables experimentation without privacy concerns.
-
----
-
-## 4. Modeling Approach
-
-- Algorithm: Ordinary Least Squares via `sklearn.linear_model.LinearRegression`.
-- Feature Space: Numeric features (scaled) + one‑hot encoded categoricals (drop_first to avoid dummy trap) + engineered features.
-- Scaling: StandardScaler applied to numeric columns only (stored in artifact).
-- Negative prediction safeguard: Predictions clamped to ≥ 0.
-
----
-
-## 5. Project Structure
+## Project Structure
 
 ```
 Car_Valuation_Tunisia/
-├── app/                      # Streamlit application
-├── data/
-│   └── raw/                  # Generated dataset CSV
-├── models/                   # Saved model artifacts (.pkl)
-├── notebooks/
-│   └── Tunisia_Cars_Price_Prediction.ipynb  # Training workflow
-├── scripts/
-│   └── script_to_generate_dataset.ipynb     # Dataset generation
-├── images/                   # (Reserved for visuals)
-├── requirements.txt          # Python dependencies
+├── app/app.py                              # Streamlit web application
+├── data/raw/tunisia_cars_dataset.csv       # Generated dataset
+├── models/linear_regression_tunisia_cars.pkl  # Trained model
+├── notebooks/Tunisia_Cars_Price_Prediction.ipynb  # Training pipeline
+├── scripts/script_to_generate_dataset.ipynb     # Dataset generation
+├── requirements.txt                        # Dependencies
 └── README.md
 ```
 
 ---
 
-## 6. Installation & Quick Start
+## Quick Start
+
+### 1. Setup Environment
 
 ```pwsh
 # Clone repository
 git clone https://github.com/KhalilAmamri/Car_Valuation_Tunisia.git
 cd Car_Valuation_Tunisia
 
-# (Optional) Create virtual environment
+# Create virtual environment
 python -m venv .venv
 ./.venv/Scripts/Activate.ps1
 
@@ -147,123 +76,57 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
----
-
-## 7. Usage
-
-### A. Regenerate Dataset
-
-Open `scripts/script_to_generate_dataset.ipynb` and run all cells (or export logic into a script if desired) to produce `data/raw/tunisia_cars_dataset.csv`.
-
-### B. Train / Refresh Model
-
-Run sections 1 → 7 of `notebooks/Tunisia_Cars_Price_Prediction.ipynb`. This will output a fresh artifact: `models/linear_regression_tunisia_cars.pkl`.
-
-### C. Launch Streamlit App Locally
+### 2. Launch App Locally
 
 ```pwsh
 streamlit run app/app.py
 ```
 
-Open the provided local URL (default: http://localhost:8501).
-
-### D. Use Hosted Version
-
-Visit: https://car-valuation-tunisia.streamlit.app/
+Or visit the **live app**: https://car-valuation-tunisia.streamlit.app/
 
 ---
 
-## 8. Model Artifact Details
+## How to Use
 
-`models/linear_regression_tunisia_cars.pkl` includes:
+### Option A: Use the Web App (Recommended)
 
-```python
-{
-	'model_name': 'Linear Regression',
-	'model': <LinearRegression>,
-	'scaler': <StandardScaler>,
-	'numeric_columns': [...],
-	'feature_columns': [... all columns after encoding ...],
-	'categorical_columns': ['brand','model','fuel','gearbox','vehicle_condition','car_body','import_or_local','location','color'],
-	'engineered_features': ['age','mileage_per_year'],
-	'metrics': {
-		 'r2_test': <float>,
-		 'mae': <float>
-	}
-}
+1. Visit https://car-valuation-tunisia.streamlit.app/
+2. Select car specifications (brand, model, year, mileage, condition, etc.)
+3. Get instant price prediction with key factors analysis
+
+### Option B: Regenerate Dataset & Train Model
+
+1. Open `scripts/script_to_generate_dataset.ipynb` → Run all cells
+2. Open `notebooks/Tunisia_Cars_Price_Prediction.ipynb` → Run sections 1-7
+3. New model artifact saved to `models/linear_regression_tunisia_cars.pkl`
+
+### Option C: Run Streamlit Locally
+
+```pwsh
+streamlit run app/app.py
 ```
 
-RMSE intentionally excluded to streamline evaluation focus.
+Visit `http://localhost:8501`
 
 ---
 
-## 9. Metrics & Evaluation
+## Model Details
 
-Displayed in notebook Section 6:
-
-- R² Score (variance explained)
-- MAE (average absolute error in TND)
-
-Scatter plot: Actual vs Predicted provides visual alignment (45° reference line).
-
-> Regenerating the dataset will change performance values slightly due to stochastic noise.
+- **Algorithm**: Multiple Linear Regression (scikit-learn)
+- **Features**: Age, mileage/year, brand, model, fuel type, gearbox, condition, body type, location, color
+- **Performance**: R² = 0.8991 | MAE = 3,876 TND
+- **Encoding**: One-hot encoding (drop_first=True) with StandardScaler for numeric features
 
 ---
 
-## 10. Feature Definitions (Selected)
+## Disclaimer
 
-- `age`: `2025 - year` (future anchor year for consistency).
-- `mileage_per_year`: `mileage / max(age,1)`.
-- One‑hot encoded categorical fields: brand, model, fuel, gearbox, vehicle_condition, car_body, import_or_local, location, color.
-- Options (binary): air_conditioning, parking_sensor, rear_camera, sunroof, alloy_wheels, bluetooth, gps (currently not all used directly in baseline model—extendable).
+⚠️ **This dataset is entirely synthetic and for educational purposes only.** Predictions do NOT represent official market valuations. Always consult real market data and professional sources for financial decisions.
 
 ---
 
-## 11. How to Reproduce End‑to‑End
+## 🙌 Team
 
-1. Generate dataset (script notebook).
-2. Inspect initial scatter plots (Year vs Price, Mileage vs Price).
-3. Clean missing values (median numeric, drop incomplete categorical rows).
-4. Engineer `age` & `mileage_per_year`.
-5. Encode categoricals (`get_dummies(drop_first=True)`).
-6. Split, scale numerics, train linear regression.
-7. Evaluate (R², MAE + scatter plot).
-8. Save artifact to `models/`.
-9. Launch Streamlit app which loads artifact and dataset for dropdowns.
-
----
-
-## 12. Roadmap & Possible Enhancements
-
-- Add regularization (Ridge/Lasso) & compare generalization.
-- Introduce feature importance via permutation tests.
-- Persist prediction logs (user inputs → predicted price) for analytics.
-- Add confidence intervals around predictions.
-- Switch synthetic year anchor from 2025 to dynamic current year.
-- Replace categorical row drops with mode imputation for higher data retention.
-- Containerize (Dockerfile + devcontainer updates).
-- CI workflow (lint, test training pipeline on sample subset).
-
----
-
-## 13. Disclaimer
-
-This dataset is entirely synthetic and for educational/demonstrative use. Predictions do **not** represent official market valuations. Always consult real market data and professional sources for financial decisions.
-
----
-
-## 🙌 Acknowledgements
-
-Team Members: Khalil Amamri, Montassar Zreilli, Wassim Mnassri, Mahdi Hadj Amor.
-
-Inspired by standard supervised ML workflows and open data modeling best practices.
-
----
-
-## 📬 Contact / Support
-
-Feel free to open an issue or propose improvements via pull requests.
-
----
+Khalil Amamri | Montassar Zreilli | Wassim Mnassri | Mahdi Hadj Amor
 
 Enjoy exploring Tunisian car valuation! 🚗🇹🇳
