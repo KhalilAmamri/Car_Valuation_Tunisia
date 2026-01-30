@@ -78,7 +78,11 @@ This project provides a transparent, end-to-end machine learning workflow to est
 
 ```
 Car_Valuation_Tunisia/
-├── app/app.py                              # Streamlit web application
+├── app/
+│   ├── Predict_Price.py                    # Main prediction page
+│   └── pages/
+│       ├── Market_Insights.py              # Market dashboard
+│       └── About_Model.py                  # Model documentation
 ├── data/raw/tunisia_cars_dataset.csv       # Generated dataset
 ├── models/linear_regression_tunisia_cars.pkl  # Trained model
 ├── notebooks/Tunisia_Cars_Price_Prediction.ipynb  # Training pipeline
@@ -109,8 +113,14 @@ pip install -r requirements.txt
 ### 2. Launch App Locally
 
 ```pwsh
-streamlit run app/app.py
+streamlit run app/Predict_Price.py
 ```
+
+The app includes **3 pages** accessible via sidebar:
+
+- **Predict Price**: Interactive car price prediction
+- **Market Insights**: Dashboard with market visualizations
+- **About Model**: Model explanation and metrics
 
 Or visit the **live app**: https://car-valuation-tunisia.streamlit.app/
 
@@ -121,19 +131,21 @@ Or visit the **live app**: https://car-valuation-tunisia.streamlit.app/
 ### Option A: Use the Web App (Recommended)
 
 1. Visit https://car-valuation-tunisia.streamlit.app/
-2. Select car specifications (brand, model, year, mileage, condition, etc.)
-3. Get instant price prediction with key factors analysis
+2. Navigate between pages:
+   - **Predict Price**: Enter car specs and get price estimates
+   - **Market Insights**: Explore market trends
+   - **About Model**: Learn how the model works
 
 ### Option B: Regenerate Dataset & Train Model
 
-1. Open `scripts/script_to_generate_dataset.ipynb` → Run all cells
-2. Open `notebooks/Tunisia_Cars_Price_Prediction.ipynb` → Run sections 1-7
-3. New model artifact saved to `models/linear_regression_tunisia_cars.pkl`
+1. Run `scripts/script_to_generate_dataset.ipynb` → All cells
+2. Run `notebooks/Tunisia_Cars_Price_Prediction.ipynb` → Sections 1-7
+3. Model saved to `models/linear_regression_tunisia_cars.pkl`
 
-### Option C: Run Streamlit Locally
+### Option C: Run Locally
 
 ```pwsh
-streamlit run app/app.py
+streamlit run app/Predict_Price.py
 ```
 
 Visit `http://localhost:8501`

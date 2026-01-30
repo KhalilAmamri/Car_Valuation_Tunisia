@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import plotly.express as px
-import plotly.graph_objects as go
 from pathlib import Path
 
 # Page config
@@ -169,42 +167,23 @@ else:
     car_bodies = ["citadine", "compacte", "berline", "SUV", "break", "monospace", "pickup"]
     import_types = ["local", "imported"]
 
-# Header
-st.markdown('<div class="main-header">🚗 Tunisia Car Price Predictor</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Get instant price estimates for used cars in Tunisia</div>', unsafe_allow_html=True)
-
 # Sidebar
 with st.sidebar:
-    flag_path = Path(__file__).parent.parent / "images" / "Flag_of_Tunisia.png"
-    if flag_path.exists():
-        st.image(str(flag_path), width=100)
-    else:
-        st.image("🇹🇳")
-    st.title("About")
-    st.info(
-        """
-        This app predicts used car prices in Tunisia using a **Linear Regression** model 
-        trained on 60,000+ car listings across all 24 governorates.
-        """
-    )
-    
-    st.subheader("📊 Model Performance")
+    st.title("🚗 Tunisia Car Predictor")
+    st.markdown("---")
+    st.subheader("📊 Performance")
     metrics = artifact.get('metrics', {})
     if metrics:
         st.metric("R² Score", f"{metrics.get('r2_test', 0):.4f}")
         st.metric("MAE", f"{metrics.get('mae', 0):,.0f} TND")
     
     st.markdown("---")
-    st.markdown("**Model:** Linear Regression")
-    st.markdown("### 👥 Developed By")
-    st.markdown("""
-    <div style='line-height:1.6;'>
-    <strong>Khalil Amamri</strong><br>
-    <strong>Montassar Zreilli</strong><br>
-    <strong>Wassim Mnassri</strong><br>
-    <strong>Mahdi Hadj Amor</strong>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("**Linear Regression Model**")
+    st.markdown("**60,000+ listings**")
+
+# Header
+st.markdown('<div class="main-header">🚗 Predict Car Price</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Get instant price estimates for used cars in Tunisia</div>', unsafe_allow_html=True)
 
 # Main content
 col1, col2 = st.columns([2, 1])
@@ -371,45 +350,28 @@ with col2:
             st.error(f"❌ Prediction error: {str(e)}")
             st.info("Please check your inputs and try again.")
 
-# Feature Importance Section
+# Tips section
 st.markdown("---")
-st.subheader("📊 Model Insights")
+st.subheader("💡 Valuation Tips")
 
-col_insight1, col_insight2 = st.columns(2)
+col_tip1, col_tip2 = st.columns(2)
 
-with col_insight1:
-    st.markdown("##### Most Important Features")
+with col_tip1:
     st.markdown("""
-    The model considers multiple factors:
-    - **Age & Mileage**: Older cars with higher mileage typically cost less
-    - **Brand & Model**: Premium brands command higher prices
-    - **Condition**: Excellent condition significantly increases value
-    - **Features**: Modern features like GPS, rear camera add value
-    - **Location**: Urban areas may have different pricing
+    **Increase Value:**
+    - Regular maintenance
+    - Excellent condition
+    - Low mileage
+    - Complete service history
     """)
 
-with col_insight2:
-    st.markdown("##### Tips for Better Valuation")
+with col_tip2:
     st.markdown("""
-    - 🔧 **Regular maintenance** preserves value
-    - 📉 **Avoid accidents** to maintain higher resale value
-    - ⭐ **Keep car in excellent condition**
-    - 🚗 **Lower annual mileage** increases value
-    - 📍 **Consider location** when pricing
-    """)
-
-# Team & Credits (moved from sidebar for better focus)
-with st.expander("👥 Project Team & Credits"):
-    st.markdown("""
-    **Core Team**
-    - Khalil Amamri  
-    - Montassar Zreilli  
-    - Wassim Mnassri  
-    - Mahdi Hadj Amor  
-    
-    **Notes**
-    - Dataset is synthetic and for educational purposes.
-    - Linear Regression emphasizes interpretability over raw predictive power.
+    **Value Reducers:**
+    - Accident history
+    - Multiple owners
+    - Poor condition
+    - High mileage
     """)
 
 # Footer
@@ -417,6 +379,6 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; font-size: 0.9rem;">
     <p>🚗 Tunisia Car Price Predictor | Powered by Machine Learning</p>
-    <p>Data based on 60,000+ car listings across all 24 governorates of Tunisia</p>
+    <p>Educational project - Synthetic data for demonstration purposes</p>
 </div>
 """, unsafe_allow_html=True)
