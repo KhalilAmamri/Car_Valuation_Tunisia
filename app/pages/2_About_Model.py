@@ -405,7 +405,6 @@ st.markdown("""
     Khalil Amamri | Montassar Zreilli | Wassim Mnassri | Mahdi Hadj Amor
     <br><br>
     <strong>Project Type:</strong> Educational Machine Learning Project<br>
-    <strong>Year:</strong> 2026
 </div>
 """, unsafe_allow_html=True)
 
