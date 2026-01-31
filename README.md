@@ -4,7 +4,7 @@
 
 Estimate used car prices in Tunisia using Machine Learning. Interactive Streamlit app with real-time predictions and market insights.
 
-**Live App:** https://car-valuation-tunisia.streamlit.app/
+**Live App:** https://carvaluationtunisia.streamlit.app/
 
 </div>
 
@@ -37,7 +37,7 @@ Estimate used car prices in Tunisia using Machine Learning. Interactive Streamli
 
 ### Online (Easiest)
 
-Visit: https://car-valuation-tunisia.streamlit.app/
+Visit: https://carvaluationtunisia.streamlit.app/
 
 ### Local Setup
 
